@@ -1,0 +1,35 @@
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="io.odoc.webintent"
+    version="1.0.0">
+    <name>Cordova WebIntentPlugin</name>
+    <description>This Share allows your application to receive share content.</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,webintent,share</keywords>
+
+    <js-module src="www/webintent.js" name="WebIntent">
+        <clobbers target="WebIntent" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="WebIntent" >
+                <param name="android-package" value="io.odoc.webintent.WebIntent"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="application/activity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </config-file>
+        <source-file src="src/io/odoc/webintent/WebIntent.java"
+                     target-dir="src/io/odoc/webintent" />
+    </platform>
+</plugin>
